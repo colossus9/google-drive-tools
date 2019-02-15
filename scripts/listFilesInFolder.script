@@ -1,11 +1,20 @@
-/* Code written by @hubgit 
-   <style>.gist table { margin-bottom: 0; }</style><div class="gist-oembed" data-gist="hubgit/3755293.json"></div>
-   Updated since DocsList is deprecated 
-   Reference: https://ctrlq.org/code/19854-list-files-in-google-drive-folder
+/* 
+   References: 
+    - https://ctrlq.org/code/19854-list-files-in-google-drive-folder
+    - https://developers.google.com/apps-script/guides/menus
 */
 
+function onOpen() {
+  var ui = SpreadsheetApp.getUi();
+  // Or DocumentApp or FormApp.
+  ui.createMenu('colossus9 Menu')
+      .addItem('List Files in Folder', 'listFilesInFolder')
+      .addToUi();
+}
+
 function listFilesInFolder(folderName) {
-  
+  SpreadsheetApp.getUi() // Or DocumentApp or FormApp.
+     .alert('Getting list of files...');
   var folder = DriveApp.getFoldersByName(folderName).next();
   var contents = folder.getFiles();
   
@@ -35,5 +44,4 @@ function listFilesInFolder(folderName) {
     sheet.appendRow(data);
   
   }
-  
-};
+}
